@@ -6,7 +6,7 @@ import { Button } from 'galio-framework';
 import { theme, withGalio, GalioProvider } from 'galio-framework'
 
 
-export default class HomeScreen extends Component {
+export default class LoginScreen extends Component {
 
   componentDidMount() {
 

@@ -1,28 +1,38 @@
-import React, { Component } from 'react';
-import { Container, Header, Content, Tab, Tabs, Left, Body, Right, Title } from 'native-base';
-import Tab1 from './src/pages/LoginScreen';
-import Tab2 from './src/pages/ConversaScreen';
-import Tab3 from './src/pages/ChamadaScreen';
-export default class TabsExample extends Component {
-  render() {
-    return (
-      <Container >
-      
-        <Header style={{ backgroundColor: "#ff5448", Title: "legal", height: 2 }} androidStatusBarColor="#ff5448" hasSubtitle="true" searchBar />
+import * as React from 'react';
+import { Button, View } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+import LoginScreen from './src/pages/LoginScreen';
+import TabScreen from './src/TabScreen';
 
-        <Tabs>
-          <Tab heading="Login" tabStyle={{ backgroundColor: "#ff4d00" }} activeTabStyle={{ backgroundColor: "#ff0000" }}>
-            <Tab1 />
-          </Tab>
-          <Tab heading="Conversas" tabStyle={{ backgroundColor: "#ff4d00" }} activeTabStyle={{ backgroundColor: "#ff0000" }}>
-            <Tab2 />
-          </Tab>
-          <Tab heading="Chamadas" tabStyle={{ backgroundColor: "#ff4d00" }} activeTabStyle={{ backgroundColor: "#ff0000" }}>
-            <Tab3 />
-          </Tab>
-        </Tabs>
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.navigate('Notifications')}
+        title="Go to notifications"
+      />
+    </View>
+  );
+}
 
-      </Container>
-    );
-  }
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={TabScreen} />
+        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
 }
